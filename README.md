@@ -9,6 +9,24 @@
 - город нахождения магазина;
 - количество пользователей, закреплённых в этом магазине.
 
+**Решение**
+
+```
+SELECT CONCAT_WS(' ', st.first_name, st.last_name) AS 'фамилия и имя сотрудника', 
+ct.city AS 'город нахождения магазина', 
+COUNT(c.customer_id) AS 'количество пользователей'  
+FROM store s 
+JOIN customer c ON s.store_id = c.store_id 
+JOIN address a ON a.address_id = s.store_id 
+JOIN city ct ON ct.city_id = a.city_id
+join staff st ON st.staff_id = s.store_id 
+GROUP BY s.store_id HAVING COUNT(c.customer_id) > 300;
+```
+
+- результат
+  
+  <img src="images/Task_1.png" alt="Task_1.png" width="750" height="auto">
+
 ---
 
 ### Задание 2
