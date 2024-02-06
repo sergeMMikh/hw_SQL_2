@@ -14,13 +14,13 @@
 ```
 SELECT CONCAT_WS(' ', st.last_name, st.first_name) AS 'фамилия и имя сотрудника', 
 ct.city AS 'город нахождения магазина', 
-COUNT(c.customer_id) AS 'количество пользователей'  
+COUNT(c.customer_id) AS количество_пользователей  
 FROM store s 
 JOIN customer c ON s.store_id = c.store_id 
 JOIN address a ON a.address_id = s.store_id 
 JOIN city ct ON ct.city_id = a.city_id
 JOIN staff st ON st.staff_id = s.store_id 
-GROUP BY s.store_id HAVING COUNT(c.customer_id) > 300;
+GROUP BY s.store_id HAVING количество_пользователей > 300;
 ```
 
 - результат
