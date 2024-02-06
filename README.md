@@ -45,6 +45,8 @@ WHERE f.length > (SELECT AVG(length) FROM film);
   
   <img src="images/Task_2.png" alt="Task_2_.png" width="750" height="auto">
 
+---
+
 ### Задание 3
 
 Получите информацию, за какой месяц была получена наибольшая сумма платежей, и добавьте информацию по количеству аренд за этот месяц.
