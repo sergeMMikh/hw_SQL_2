@@ -25,7 +25,7 @@ GROUP BY s.store_id HAVING COUNT(c.customer_id) > 300;
 
 - результат
   
-  <img src="images/Task_1.png" alt="Task_1_.png" width="750" height="auto">
+  <img src="images/Task_1_.png" alt="Task_1_.png" width="750" height="auto">
 
 ---
 
@@ -33,8 +33,11 @@ GROUP BY s.store_id HAVING COUNT(c.customer_id) > 300;
 
 Получите количество фильмов, продолжительность которых больше средней продолжительности всех фильмов.
 
+**Решение**
+
 ```
-SELECT COUNT(f.film_id) AS 'количество фильмов, продолжительность которых больше средней' FROM film f
+SELECT COUNT(f.film_id) AS 'количество фильмов, продолжительность которых больше средней'
+FROM film f
 WHERE f.length > (SELECT AVG(length) FROM film);
 ```
 
@@ -47,17 +50,14 @@ WHERE f.length > (SELECT AVG(length) FROM film);
 Получите информацию, за какой месяц была получена наибольшая сумма платежей, и добавьте информацию по количеству аренд за этот месяц.
 
 ```
-SELECT MONTH(p.payment_date), SUM(p.amount), COUNT(p.rental_id) FROM payment p 
-GROUP BY MONTH(p.payment_date);
+SELECT MONTHNAME(DATE(p.payment_date)) AS месяц, SUM(p.amount) AS сумма_платежей, COUNT(p.rental_id) AS количество_аренд
+FROM payment p 
+GROUP BY MONTHNAME(DATE(p.payment_date))
+ORDER BY сумма_платежей LIMIT 1;
 ```
 
-## Дополнительные задания (со звёздочкой*)
-Эти задания дополнительные, то есть не обязательные к выполнению, и никак не повлияют на получение вами зачёта по этому домашнему заданию. Вы можете их выполнить, если хотите глубже шире разобраться в материале.
+- результат
+  
+  <img src="images/Task_3.png" alt="Task_2_.png" width="750" height="auto">
 
-### Задание 4*
 
-Посчитайте количество продаж, выполненных каждым продавцом. Добавьте вычисляемую колонку «Премия». Если количество продаж превышает 8000, то значение в колонке будет «Да», иначе должно быть значение «Нет».
-
-### Задание 5*
-
-Найдите фильмы, которые ни разу не брали в аренду.
