@@ -51,6 +51,11 @@ WHERE f.length > (SELECT AVG(length) FROM film);
 
 Получите информацию, за какой месяц была получена наибольшая сумма платежей, и добавьте информацию по количеству аренд за этот месяц.
 
+**Решение 1**
+
+В задании не сказано о разделенни данных по годам. Более того, контора может захотеть проанализировать в какой период года наибольшее количество продаж.
+Потому оставляю первое решение, за ним последует вариант с разделение на годы с использовнаие DATE_FORMAT. 
+
 ```
 SELECT MONTHNAME(DATE(p.payment_date)) AS месяц, SUM(p.amount) AS сумма_платежей, COUNT(p.rental_id) AS количество_аренд
 FROM payment p 
@@ -60,6 +65,20 @@ ORDER BY сумма_платежей LIMIT 1;
 
 - результат
   
-  <img src="images/Task_3.png" alt="Task_2_.png" width="750" height="auto">
+  <img src="images/Task_3.png" alt="Task_3.png" width="750" height="auto">
+
+
+**Решение 2**
+
+```
+SELECT DATE_FORMAT(p.payment_date, '%M, %Y') AS месяц, SUM(p.amount) AS сумма_платежей, COUNT(p.rental_id) AS количество_аренд
+FROM payment p 
+GROUP BY месяц
+ORDER BY сумма_платежей LIMIT 1;
+```
+
+- результат
+  
+  <img src="images/Task_3_2.png" alt="Task_3_2.png" width="750" height="auto">
 
 
